@@ -1,0 +1,226 @@
+ <!DOCTYPE HTML>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>MuzHic!</title>
+	<link rel="stylesheet" href="jquery.mobile-1.4.0/jquery.mobile-1.4.0.min.css" />
+	<link rel="stylesheet" type="text/css" href="styles.css" />
+	<link type="text/css" href="skin/jplayer.blue.monday.css" rel="stylesheet" /> <!-- css jplayer -->
+
+	
+	<script type="text/javascript" src="jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="jquery/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript" src="jquery.mobile-1.4.0/jquery.mobile-1.4.0.min.js"></script>
+	<script type="text/javascript" src="bdd.js"></script>
+	<script type="text/javascript" src="bddChansons.js"></script>
+	<script type="text/javascript" src="resultatMelange.js"></script>
+
+	<script type="text/javascript" src="js/jquery.jplayer.min.js"></script> <!-- js jplayer -->
+
+	
+	<script type="text/javascript">
+		//var saisie = ['jaune', 'rhum', 'éléphant', 'coquelicot', 'chausson']; //test
+		var saisie = ['', '', '', '', ''];
+		var result = "";
+	</script>
+	
+	<script type="text/javascript">
+		$(document).ready(function(){
+		  $("#jquery_jplayer_1").jPlayer({
+			ready: function () {
+			  $(this).jPlayer("setMedia", {
+				title: chanson[i][0],
+				mp3: chanson[i][1],
+			  });
+			},
+			swfPath: "js",
+			supplied: "mp3"
+		  });
+		});
+	</script>
+	
+	<script type="text/javascript">
+			function afficherChansons(chansonsAffichees){
+				//On affiche la liste des chansons qui correspondent au résutlat de notre mélange
+				
+				var monDiv = $("#listeChansons");
+				
+				for(i=0; i<chansonsAffichees.length; i++){
+					
+					var lien = $('<a></a>', {
+						href : '#',
+						html : chansonsAffichees[i],
+						name : chansonsAffichees[i],
+						class : 'ui-btn ui-icon-audio ui-btn-icon-right'
+					});
+					
+					lien.click(function(){
+						// FAIRE LE LIEN VERS JPLAYER : MARCHE PAS
+						for(i=0; i<chanson[i].length; i++){
+							if(chansonsAffichees[i] == chanson[i][0]) /* on compare */
+							{
+								// lire la chanson
+								alert(chanson[i][1]); // marche 1 fois sur 2
+							}
+						}
+						alert(this.name);
+					});
+					
+					monDiv.append(lien);
+				}
+			}
+		</script>
+
+	
+</head>
+
+<body>
+
+
+<!-- PAGE DE CHARGEMENT -->
+
+<div id = "page1" data-role="page" data-theme="a">
+    	
+    <a href="#page1"><img src="img/logo.png" alt="Muz...Hic!" class="logo"></a> 
+    <a href="#page2" class="ui-btn ui-corner-all">Préparer un cocktail musical</a>
+ 
+</div>
+
+<!-- PAGE DE SELECTION DES INGREDIENTS -->
+
+<div id = "page2" data-role="page" data-theme="a">
+
+	<a href="#page1"><img src="img/logo.png" alt="Muz...Hic!" class="logo"></a> 
+	
+    <div class="contenu" data-role="content">
+    	<h1>Choisis tes ingrédients</h1>
+		
+		<p>Sélectionne des ingrédients originaux et déjantés, et mélange-les pour découvrir de nouvelles chansons!<br>
+		Compose un cocktail à ton goût!</p>
+				 
+		<form action="" method="get">
+		
+			<fieldset data-role="controlgroup" data-type="horizontal">
+		
+				<select onChange="saisie[0] = this.value;" name="select-choice-0" id="select-choice-0" data-native-menu="false" data-icon="false">
+					<option class="couleur" value="couleur">Couleur</option>
+					<option class="couleur-bleu" value="bleu">Bleu</option>
+					<option class="couleur-jaune" value="jaune">jaune</option>
+					<option class="couleur-vert" value="vert">vert</option>
+					<option class="couleur-rouge" value="rouge">rouge</option>
+					<option class="couleur-orange" value="orange">orange</option>
+				</select> 
+
+				<select onChange="saisie[1] = this.value;" name="select-choice-1" id="select-choice-1" data-native-menu="false" data-icon="false">
+					<option class="humeur" value="humeur">humeur</option>
+					<option class="humeur-joie" value="joie">joie</option>
+					<option class="humeur-tristesse" value="tristesse">tristesse</option>
+					<option class="humeur-colere" value="colere">colere</option>
+					<option class="humeur-etonnement" value="etonnement">etonnement</option>
+					<option class="humeur-amour" value="amour">amour</option>
+				</select> 
+
+				<select onChange="saisie[2] = this.value;" name="select-choice-2" id="select-choice-2" data-native-menu="false" data-icon="false">
+					<option class="fruit" value="fruit">fruit</option>
+					<option class="fruit-fraise" value="fraise">fraise</option>
+					<option class="fruit-poire" value="poire">poire</option>
+					<option class="fruit-ananas" value="ananas">ananas</option>
+					<option class="fruit-banane" value="banane">banane</option>
+					<option class="fruit-cerise" value="cerise">cerise</option>
+				</select> 
+
+				<select onChange="saisie[3] = this.value;" name="select-choice-3" id="select-choice-3" data-native-menu="false" data-icon="false">
+					<option class="animal" value="animal">animal</option>
+					<option class="animal-rhinoceros" value="rhinoceros">rhinoceros</option>
+					<option class="animal-taureau" value="taureau">taureau</option>
+					<option class="animal-serpent" value="serpent">serpent</option>
+					<option class="animal-panda" value="panda">panda</option>
+					<option class="animal-hippopotame" value="hippopotame">hippopotame</option>
+				</select> 
+				
+				<select onChange="saisie[4] = this.value;" name="select-choice-4" id="select-choice-4" data-native-menu="false" data-icon="false">
+					<option class="climat" value="climat">climat</option>
+					<option class="climat-pluie" value="pluie">pluie</option>
+					<option class="climat-soleil" value="soleil">soleil</option>
+					<option class="climat-orage" value="orage">orage</option>
+					<option class="climat-nuit" value="nuit">nuit</option>
+					<option class="climat-neige" value="neige">neige</option>
+				</select> 
+			
+			</fieldset>
+			
+			<a href="#page3"> <input onClick="var chansonsAffichees = resultatMelange(saisie);afficherChansons(chansonsAffichees);" value="Mélanger !" type="submit" /></a>
+		</form>
+	</div>    
+</div>
+
+
+
+<!-- PAGE DE RESULTATS -->
+
+
+<div id = "page3" data-role="page" data-theme="a">
+	<a href="#page1"><img src="img/logo.png" alt="Muz...Hic!" class="logo"></a> 
+    
+	<div class="contenu" data-role="content">
+    	<h1>Résultats du mélange</h1>
+	
+		<div id="listeChansons">
+		</div>
+		
+		<div id="noResults">
+			Aucun résultat.
+		</div>
+		
+		<!-- player -->
+		<div id="jquery_jplayer_1" class="jp-jplayer"></div>
+		  <div id="jp_container_1" class="jp-audio">
+			<div class="jp-type-single">
+			  <div class="jp-gui jp-interface">
+				<ul class="jp-controls">
+				  <li><a href="javascript:;" class="jp-play" tabindex="1">play</a></li>
+				  <li><a href="javascript:;" class="jp-pause" tabindex="1">pause</a></li>
+				  <li><a href="javascript:;" class="jp-stop" tabindex="1">stop</a></li>
+				  <li><a href="javascript:;" class="jp-mute" tabindex="1" title="mute">mute</a></li>
+				  <li><a href="javascript:;" class="jp-unmute" tabindex="1" title="unmute">unmute</a></li>
+				  <li><a href="javascript:;" class="jp-volume-max" tabindex="1" title="max volume">max volume</a></li>
+				</ul>
+				<div class="jp-progress">
+				  <div class="jp-seek-bar">
+					<div class="jp-play-bar"></div>
+				  </div>
+				</div>
+				<div class="jp-volume-bar">
+				  <div class="jp-volume-bar-value"></div>
+				</div>
+				<div class="jp-time-holder">
+				  <div class="jp-current-time"></div>
+				  <div class="jp-duration"></div>
+				  <ul class="jp-toggles">
+					<li><a href="javascript:;" class="jp-repeat" tabindex="1" title="repeat">repeat</a></li>
+					<li><a href="javascript:;" class="jp-repeat-off" tabindex="1" title="repeat off">repeat off</a></li>
+				  </ul>
+				</div>
+			  </div>
+			  <div class="jp-details">
+				<ul>
+				  <li><span class="jp-title"></span></li>
+				</ul>
+			  </div>
+			  <div class="jp-no-solution">
+				<span>Update Required</span>
+				To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+			  </div>
+			</div>
+		  </div>
+
+    </div>
+	
+    <a href="#page2" class="ui-btn ui-corner-all">Préparer un autre cocktail</a>
+	
+</div>
+
+
+ 
+</body>
+</html>
